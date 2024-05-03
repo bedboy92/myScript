@@ -18,6 +18,7 @@ do
 	source ./script/${file}
 done
 
+## Print web service 
 web_service=$(netstat -ntlup | grep -v "8080" | grep "80" | awk '{print $7}' | awk -F"/" '{print $2}')
 
 if [[ "$web_service" == *"httpd"* ]] || [[ "$web_service" == *"apache"* ]]; then
@@ -26,5 +27,19 @@ if [[ "$web_service" == *"httpd"* ]] || [[ "$web_service" == *"apache"* ]]; then
 elif [[ "$web_service" == *"nginx"* ]]; then
 	PrintNginxInfo
 	PrintNginxVhost
+fi
+
+## Print was service
+was_service=$(ps -ef | grep tomcat | grep -v "grep")
+
+if [[ -n $was_service ]]; then
+	PrintTomcatInfo
+fi
+
+## Print DB service
+mysql_bin=$(ps -ef | grep mysql | grep -v "mysqld_safe" |grep -v "grep" | grep -v "bb")
+
+if [[ -n $mysql_bin ]]; then
+	PrintMysqlInfo
 fi
 
