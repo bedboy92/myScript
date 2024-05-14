@@ -26,7 +26,13 @@ function IBM_RaidCheck() {
 bit=$(getconf LONG_BIT)
 if [ $bit -eq 64 ]; then
         /opt/MegaRAID/MegaCli/MegaCli64 -ShowSummary -aALL
+#	if [ $? -eq 127 ]; then
+#		echo -e "Raid Tool non exist..."
+#	fi
 elif [ $bit -eq 32 ]; then
         /opt/MegaRAID/MegaCli/MegaCli -ShowSummary -aALL
+#	if [ $? -eq 127 ]; then
+#                echo -e "Raid Tool non exist..."
+#        fi
 fi
 }

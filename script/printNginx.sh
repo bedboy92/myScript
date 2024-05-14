@@ -20,6 +20,8 @@ if [[ -n $nginx_bin ]]; then
 
 		echo $real_vhost
         done
+	
+	echo -e ""
 fi
 
 }

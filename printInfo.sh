@@ -43,3 +43,16 @@ if [[ -n $mysql_bin ]]; then
 	PrintMysqlInfo
 fi
 
+## Raid Check 
+echo -e "\033[34m""Raid Check...! ""\033[0m" 
+product_name=$(dmidecode | grep Product)
+
+mega_vendor="IBM, Lenovo, Dell, LENOVO"
+
+if [[ "$product_name" == *"HP"* ]] ; then
+	HP_RaidCheck
+elif [[ "$product_name" == *"$mega_vendor"*  ]]; then
+	IBM_RaidCheck
+else
+	echo -e "What is vendor??"
+fi
