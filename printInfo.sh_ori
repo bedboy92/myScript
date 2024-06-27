@@ -18,11 +18,6 @@ do
 	source ./script/${file}
 done
 
-echo -e "\033[34m ========================================================================= \033[0m    "
-## Print System Infomation
-PrintSysInfo
-
-
 ## Print web service 
 web_service=$(netstat -ntlup | grep -v "8080" | grep "80" | awk '{print $7}' | awk -F"/" '{print $2}')
 
@@ -61,5 +56,3 @@ elif [[ "$product_name" == *"$mega_vendor"*  ]]; then
 else
 	echo -e "What is vendor??"
 fi
-
-echo -e "\033[34m ========================================================================= \033[0m    "

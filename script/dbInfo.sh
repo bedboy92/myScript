@@ -10,6 +10,7 @@ if [[ -n $mysql_bin ]]; then
 
         lineCount=0
 
+	echo -e "\033[34mMysql Infomation\033[0m"
         echo "$mysql_bin" | while read line; do
 
                 # package install
@@ -26,9 +27,11 @@ if [[ -n $mysql_bin ]]; then
                                 port=`echo "$port_search" | awk '{print $4}' | awk -F":" '{print $2}'`
                         fi
 
+			
                         echo "Mysql "$((++lineCount))
-                        echo "Mysql Version : "$mysql_true_version
-                        echo "Port : "$port
+                        echo -e "Mysql Version : ". "\033[32m$mysql_true_version\033[0m"
+                        echo -e "Port : ". "$\033[32mport\033[0m"
+#                       echo -e "Directory : \033[32m/var/lib/mysql\033[0m"
 
                 # source install
                 else
@@ -36,10 +39,11 @@ if [[ -n $mysql_bin ]]; then
                         port=`echo "$line" | sed -e 's/\ /\n/g' | grep "^--port" | awk -F"=" '{print $2}'`
                         mysql_version=$($baseDirectory/bin/mysql --version | awk '{print $5}')
 
-                        echo "Mysql "$((++lineCount))
-                        echo "Mysql Directory : "$baseDirectory
-                        echo "Mysql Version : "$mysql_version
-                        echo -e "Port : "$port"\n"
+			echo "Mysql "$((++lineCount))
+                        echo -e "Mysql Directory :". "\033[32m$baseDirectory\033[0m"
+                        echo -e "Mysql Version :". "\033[32m$mysql_version\033[0m"
+                        echo -e "Port :". "\033[32m$port\033[0m\n"
+
                 fi
 
         done

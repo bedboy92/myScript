@@ -12,13 +12,14 @@ if [[ -n $apache_bin ]]; then
 
         apache_port_count=0
 
+	echo -e "\033[034mApache Port, Vhost Infomation\033[0m"
         echo "$apache_vhost_port" | while read port_line;
         do
 
                 if [[ "$apache_vhost_list" == *"$port_line"* ]]; then
-                        echo -e "\033[34m"$((++lineCount))"." $port_line "vhosts list""\033[0m"
+                        echo -e ""$((++lineCount))"." $port_line "vhosts list" "\033[0m"
 
-                        echo "$apache_vhost_list" | while read vhost_line;
+                        echo -e "apache_vhost_list" | while read vhost_line;
                         do
                                 ## ex) 211.172.246.110:443    is a NameVirtualHost not print
                                 if [[ "$vhost_line" == *"NameVirtualHost"* ]]; then
@@ -27,10 +28,10 @@ if [[ -n $apache_bin ]]; then
 
                                 if [[ "$vhost_line" == *"namevhost"* ]] && [[ "$vhost_line" == *"$port_line"*  ]]; then
                                         vhost=`echo "$vhost_line" | awk '{print $4}'`
-                                        echo -e $vhost
+                                        echo -e "\033[32m$vhost \033[0m"
                                 elif [[ "$vhost_line" == *"$port_line"* ]]; then
                                         vhost=`echo "$vhost_line" | awk '{print $2}'`
-                                        echo -e $vhost
+                                        echo -e "\033[32m$vhost \033[0m"
                                 fi
                         done
                         echo -e ""
